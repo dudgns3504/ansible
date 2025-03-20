@@ -1,5 +1,0 @@
----
-# defaults file for roles/elk
-# 기본 변수 정의
-elk_version: "7.x"
-es_heap_size: "2g"  # Elasticsearch 힙 사이즈

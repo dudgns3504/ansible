@@ -1,0 +1,24 @@
+---
+# tasks file for stop_nginx
+- name: Stop nginx
+  ansible.builtin.service:
+    name: nginx
+    state: stopped
+    enabled: no
+  notify:
+    - Reload Firewalld
+
+- name: Close firewall ports
+  ansible.builtin.firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: disabled
+    zone: public
+  loop:
+    - 80/tcp
+    - 443/tcp
+  notify: Reload Firewalld
+
+- name: Reload Firewalld
+  ansible.builtin.command:
+    cmd: firewall-cmd --reload

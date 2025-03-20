@@ -1,6 +1,0 @@
----
-- name: Install and Configure Samba
-  hosts: samba_servers
-  become: yes
-  roles:
-    - samba
