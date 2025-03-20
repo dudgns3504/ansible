@@ -1,0 +1,16 @@
+---
+# handlers file for roles/web
+- name: Start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Restart nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+
+- name: Reload Firewalld
+  ansible.builtin.firewalld:
+    state: reloaded

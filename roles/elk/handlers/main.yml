@@ -1,0 +1,16 @@
+---
+# handlers file for roles/elk
+- name: Restart Elasticsearch
+  ansible.builtin.service:
+    name: elasticsearch
+    state: restarted
+
+- name: Restart Logstash
+  ansible.builtin.service:
+    name: logstash
+    state: restarted
+
+- name: Restart Kibana
+  ansible.builtin.service:
+    name: kibana
+    state: restarted

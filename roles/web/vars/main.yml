@@ -1,0 +1,5 @@
+---
+# vars file for roles/web
+web_package: "nginx"
+web_service: "nginx"
+ansible_hostname: "{{ inventory_hostname }}"

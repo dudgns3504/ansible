@@ -1,0 +1,6 @@
+---
+# vars file for roles/elk
+# 역할에 필요한 특정 변수 설정
+elasticsearch_package: elasticsearch
+logstash_package: logstash
+kibana_package: kibana

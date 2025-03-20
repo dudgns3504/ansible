@@ -1,0 +1,6 @@
+# Elasticsearch 설정 파일 (elasticsearch.yml)
+cluster.name: "my-elk-cluster"
+node.name: "{{ ansible_hostname }}"
+network.host: 0.0.0.0
+http.port: 9200
+discovery.seed_hosts: ["127.0.0.1", "192.168.1.10"]  # 다른 노드들의 IP

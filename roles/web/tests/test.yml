@@ -1,0 +1,18 @@
+---
+- hosts: webservers
+  remote_user: root
+  become: true  # root 권한으로 명령을 실행하도록 설정
+  roles:
+    - roles/web
+  tasks:
+    - name: Check if Web Server is Running
+      command: systemctl status "{{ web_service }}"
+      register: result
+      changed_when: false
+      failed_when: result.rc != 0
+
+    - name: Fetch Web Page
+      uri:
+        url: "http://{{ inventory_hostname }}"  # 필요에 따라 정확한 URL을 설정
+        status_code: 200
+        return_content: yes

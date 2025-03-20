@@ -1,0 +1,42 @@
+---
+# roles/samba/tasks/main.yml
+- name: Install Samba and dependencies
+  ansible.builtin.yum:
+    name:
+      - samba
+      - samba-client
+      - samba-common
+    state: present
+
+- name: Create shared directory
+  ansible.builtin.file:
+    path: /srv/samba/share
+    state: directory
+    owner: root
+    group: root
+    mode: '0777'
+
+- name: Configure Samba settings
+  ansible.builtin.template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Samba
+
+- name: Open firewall ports for Samba
+  ansible.builtin.firewalld:
+    service: samba
+    permanent: yes
+    state: enabled
+  notify: Reload Firewall
+
+- name: Set SELinux permissions for Samba
+  ansible.builtin.command: setsebool -P samba_enable_home_dirs on
+
+- name: Start and enable Samba service
+  ansible.builtin.systemd:
+    name: smb
+    enabled: yes
+    state: started

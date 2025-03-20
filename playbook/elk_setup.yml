@@ -1,0 +1,6 @@
+---
+- name: Install and configure ELK stack
+  hosts: elk_servers
+  become: yes
+  roles:
+    - elk
